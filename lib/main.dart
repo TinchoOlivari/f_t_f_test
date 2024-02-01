@@ -1,5 +1,7 @@
-import 'package:f_t_f_test/pages/home_page.dart';
+import 'package:f_t_f_test/pages/commit_list_page.dart';
+import 'package:f_t_f_test/provider/commit_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const App());
@@ -16,7 +18,10 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: ChangeNotifierProvider(
+        create: (ctx) => CommitProvider(),
+        child: const CommitListPage(),
+      ),
     );
   }
 }
