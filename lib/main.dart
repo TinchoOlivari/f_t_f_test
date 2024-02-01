@@ -16,7 +16,6 @@ class App extends StatelessWidget {
       title: 'Take-Home Test',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-        useMaterial3: true,
       ),
       home: ChangeNotifierProvider(
         create: (ctx) => CommitProvider(),
