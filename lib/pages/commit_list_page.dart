@@ -1,4 +1,6 @@
+import 'package:f_t_f_test/helpers/date.dart';
 import 'package:f_t_f_test/provider/commit_provider.dart';
+import 'package:f_t_f_test/widgets/commit_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +23,8 @@ class _CommitListPageState extends State<CommitListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Commit list"),
+        title: const Text("Commits"),
+        centerTitle: true,
       ),
       body: Consumer<CommitProvider>(
         builder: (context, value, child) {
@@ -32,8 +35,16 @@ class _CommitListPageState extends State<CommitListPage> {
             itemBuilder: (context, index) {
               final commit = commits[index];
               final message = commit.commit?.message ?? "";
+              final author = commit.commit?.author?.name ?? "";
+              final daysAgo = daysAgoFormat(commit.commit!.committer!.date);
+              final avatarUrl = commit.author?.avatarUrl ?? "";
 
-              return ListTile(title: Text(message));
+              return CommitListTile(
+                message: message,
+                author: author,
+                daysAgo: daysAgo,
+                avatarUrl: avatarUrl,
+              );
             },
           );
         },
