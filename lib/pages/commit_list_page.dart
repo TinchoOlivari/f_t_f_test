@@ -36,13 +36,13 @@ class _CommitListPageState extends State<CommitListPage> {
               final commit = commits[index];
               final message = commit.commit?.message ?? "";
               final author = commit.commit?.author?.name ?? "";
-              final daysAgo = daysAgoFormat(commit.commit!.committer!.date);
+              final time = timeAgo(commit.commit!.committer!.date);
               final avatarUrl = commit.author?.avatarUrl ?? "";
 
               return CommitListTile(
                 message: message,
                 author: author,
-                daysAgo: daysAgo,
+                time: time,
                 avatarUrl: avatarUrl,
               );
             },

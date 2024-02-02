@@ -1,18 +1,17 @@
-import 'package:f_t_f_test/helpers/date.dart';
 import 'package:flutter/material.dart';
 
 class CommitListTile extends StatelessWidget {
   final String message;
   final String avatarUrl;
   final String author;
-  final String daysAgo;
+  final String time;
 
   const CommitListTile({
     super.key,
     required this.message,
     required this.avatarUrl,
     required this.author,
-    required this.daysAgo,
+    required this.time,
   });
 
   @override
@@ -26,7 +25,7 @@ class CommitListTile extends StatelessWidget {
           Text(author),
         ],
       ),
-      trailing: Text(daysAgo),
+      trailing: Text(time),
     );
   }
 }
