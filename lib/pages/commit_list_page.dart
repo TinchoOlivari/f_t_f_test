@@ -22,10 +22,7 @@ class _CommitListPageState extends State<CommitListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Commits"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("Commits")),
       body: Consumer<CommitProvider>(
         builder: (context, value, child) {
           final isLoading = value.isLoading;
@@ -38,7 +35,13 @@ class _CommitListPageState extends State<CommitListPage> {
           } else if (isError) {
             return Center(child: Text(error!));
           } else {
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (context, index) {
+                return Padding(
+                  padding: Theme.of(context).listTileTheme.contentPadding!,
+                  child: const Divider(),
+                );
+              },
               itemCount: value.commitList.length,
               itemBuilder: (context, index) {
                 final commit = commits[index];

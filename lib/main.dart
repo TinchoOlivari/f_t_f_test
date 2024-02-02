@@ -1,5 +1,6 @@
 import 'package:f_t_f_test/pages/commit_list_page.dart';
 import 'package:f_t_f_test/provider/commit_provider.dart';
+import 'package:f_t_f_test/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +15,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Take-Home Test',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-      ),
+      theme: theme,
       home: ChangeNotifierProvider(
         create: (ctx) => CommitProvider(),
         child: const CommitListPage(),

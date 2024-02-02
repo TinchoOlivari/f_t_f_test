@@ -18,12 +18,18 @@ class CommitListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(message),
-      subtitle: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Image.network(avatarUrl, width: 15, height: 15),
-          Text(author),
-        ],
+      subtitle: Padding(
+        padding: const EdgeInsets.only(top: 4),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 4),
+              child: Image.network(avatarUrl, width: 15, height: 15),
+            ),
+            Text(author),
+          ],
+        ),
       ),
       trailing: Text(time),
     );
