@@ -28,25 +28,34 @@ class _CommitListPageState extends State<CommitListPage> {
       ),
       body: Consumer<CommitProvider>(
         builder: (context, value, child) {
+          final isLoading = value.isLoading;
+          final error = value.error;
+          final isError = value.isError;
           final commits = value.commitList;
 
-          return ListView.builder(
-            itemCount: value.commitList.length,
-            itemBuilder: (context, index) {
-              final commit = commits[index];
-              final message = commit.commit?.message ?? "";
-              final author = commit.commit?.author?.name ?? "";
-              final time = timeAgo(commit.commit!.committer!.date);
-              final avatarUrl = commit.author?.avatarUrl ?? "";
+          if (isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (isError) {
+            return Center(child: Text(error!));
+          } else {
+            return ListView.builder(
+              itemCount: value.commitList.length,
+              itemBuilder: (context, index) {
+                final commit = commits[index];
+                final message = commit.commit?.message ?? "";
+                final author = commit.commit?.author?.name ?? "";
+                final time = timeAgo(commit.commit!.committer!.date);
+                final avatarUrl = commit.author?.avatarUrl ?? "";
 
-              return CommitListTile(
-                message: message,
-                author: author,
-                time: time,
-                avatarUrl: avatarUrl,
-              );
-            },
-          );
+                return CommitListTile(
+                  message: message,
+                  author: author,
+                  time: time,
+                  avatarUrl: avatarUrl,
+                );
+              },
+            );
+          }
         },
       ),
     );
