@@ -5,6 +5,7 @@ class CommitListTile extends StatelessWidget {
   final String avatarUrl;
   final String author;
   final String time;
+  final String sha;
 
   const CommitListTile({
     super.key,
@@ -12,6 +13,7 @@ class CommitListTile extends StatelessWidget {
     required this.avatarUrl,
     required this.author,
     required this.time,
+    required this.sha,
   });
 
   @override
@@ -20,14 +22,38 @@ class CommitListTile extends StatelessWidget {
       title: Text(message),
       subtitle: Padding(
         padding: const EdgeInsets.only(top: 4),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 4),
-              child: Image.network(avatarUrl, width: 15, height: 15),
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Text(
+                sha,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
-            Text(author),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Image.network(
+                  avatarUrl,
+                  fit: BoxFit.fitWidth,
+                  width: 15,
+                  loadingBuilder: (_, child, loadingProgress) {
+                    if (loadingProgress == null) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: child,
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                  errorBuilder: (_, __, ___) => Container(),
+                ),
+                Text(author),
+              ],
+            ),
           ],
         ),
       ),

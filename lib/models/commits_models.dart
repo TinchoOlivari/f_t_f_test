@@ -380,6 +380,7 @@ class DiffEntry {
       };
 }
 
+// ignore: constant_identifier_names
 enum Status { ADDED, CHANGED, COPIED, MODIFIED, REMOVED, RENAMED, UNCHANGED }
 
 final statusValues = EnumValues({

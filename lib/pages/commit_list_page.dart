@@ -46,6 +46,7 @@ class _CommitListPageState extends State<CommitListPage> {
               itemBuilder: (context, index) {
                 final commit = commits[index];
                 final message = commit.commit?.message ?? "";
+                final sha = commit.sha?.substring(0, 7) ?? "";
                 final author = commit.commit?.author?.name ?? "";
                 final time = timeAgo(commit.commit!.committer!.date);
                 final avatarUrl = commit.author?.avatarUrl ?? "";
@@ -55,6 +56,7 @@ class _CommitListPageState extends State<CommitListPage> {
                   author: author,
                   time: time,
                   avatarUrl: avatarUrl,
+                  sha: sha,
                 );
               },
             );
