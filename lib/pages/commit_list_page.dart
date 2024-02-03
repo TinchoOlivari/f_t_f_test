@@ -22,7 +22,17 @@ class _CommitListPageState extends State<CommitListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Commits")),
+      appBar: AppBar(
+        title: const Text("Commits"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<CommitProvider>().getCommitList();
+            },
+            icon: const Icon(Icons.refresh_outlined),
+          )
+        ],
+      ),
       body: Consumer<CommitProvider>(
         builder: (context, value, child) {
           final isLoading = value.isLoading;

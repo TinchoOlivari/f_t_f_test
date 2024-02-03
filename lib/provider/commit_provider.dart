@@ -21,11 +21,11 @@ class CommitProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     try {
-      _isLoading = false;
       _commitList = await _commitService.listCommits();
-    } on HttpException catch (e) {
       _isLoading = false;
+    } on HttpException catch (e) {
       _error = e.message;
+      _isLoading = false;
     }
     notifyListeners();
   }
