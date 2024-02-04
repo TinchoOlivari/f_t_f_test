@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:f_t_f_test/config.dart';
-import 'package:f_t_f_test/models/commits_models.dart';
+import 'package:f_t_f_test/core/config.dart';
+import 'package:f_t_f_test/features/commits/domain/entities/entities.dart';
 import 'package:http/http.dart' as http;
 
 class CommitService {
   // https://docs.github.com/es/rest/commits/commits#list-commits
-  Future<List<CommitList>> listCommits() async {
+  Future<List<CommitListEntity>> listCommits() async {
     const url = '${Config.baseUrl}/commits';
     final uri = Uri.parse(url);
     final response = await http.get(uri);

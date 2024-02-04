@@ -6,27 +6,28 @@
 
 import 'dart:convert';
 
-List<CommitList> commitListFromJson(String str) =>
-    List<CommitList>.from(json.decode(str).map((x) => CommitList.fromJson(x)));
+List<CommitListEntity> commitListFromJson(String str) =>
+    List<CommitListEntity>.from(
+        json.decode(str).map((x) => CommitListEntity.fromJson(x)));
 
-String commitListToJson(List<CommitList> data) =>
+String commitListToJson(List<CommitListEntity> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-///Commit
-class CommitList {
-  GithubUser? author;
+///CommitEntity
+class CommitListEntity {
+  GithubUserEntity? author;
   String? commentsUrl;
-  Commit? commit;
-  GithubUser? committer;
-  List<DiffEntry>? files;
+  CommitEntity? commit;
+  GithubUserEntity? committer;
+  List<DiffEntryEntity>? files;
   String? htmlUrl;
   String? nodeId;
-  List<Parent>? parents;
+  List<ParentEntity>? parents;
   String? sha;
-  Stats? stats;
+  StatsEntity? stats;
   String? url;
 
-  CommitList({
+  CommitListEntity({
     this.author,
     this.commentsUrl,
     this.commit,
@@ -40,26 +41,31 @@ class CommitList {
     this.url,
   });
 
-  factory CommitList.fromJson(Map<String, dynamic> json) => CommitList(
-        author:
-            json["author"] == null ? null : GithubUser.fromJson(json["author"]),
+  factory CommitListEntity.fromJson(Map<String, dynamic> json) =>
+      CommitListEntity(
+        author: json["author"] == null
+            ? null
+            : GithubUserEntity.fromJson(json["author"]),
         commentsUrl: json["comments_url"],
-        commit: json["commit"] == null ? null : Commit.fromJson(json["commit"]),
+        commit: json["commit"] == null
+            ? null
+            : CommitEntity.fromJson(json["commit"]),
         committer: json["committer"] == null
             ? null
-            : GithubUser.fromJson(json["committer"]),
+            : GithubUserEntity.fromJson(json["committer"]),
         files: json["files"] == null
             ? []
-            : List<DiffEntry>.from(
-                json["files"]!.map((x) => DiffEntry.fromJson(x))),
+            : List<DiffEntryEntity>.from(
+                json["files"]!.map((x) => DiffEntryEntity.fromJson(x))),
         htmlUrl: json["html_url"],
         nodeId: json["node_id"],
         parents: json["parents"] == null
             ? []
-            : List<Parent>.from(
-                json["parents"]!.map((x) => Parent.fromJson(x))),
+            : List<ParentEntity>.from(
+                json["parents"]!.map((x) => ParentEntity.fromJson(x))),
         sha: json["sha"],
-        stats: json["stats"] == null ? null : Stats.fromJson(json["stats"]),
+        stats:
+            json["stats"] == null ? null : StatsEntity.fromJson(json["stats"]),
         url: json["url"],
       );
 
@@ -83,7 +89,7 @@ class CommitList {
 }
 
 ///A GitHub user.
-class GithubUser {
+class GithubUserEntity {
   String? avatarUrl;
   String? email;
   String? eventsUrl;
@@ -106,7 +112,7 @@ class GithubUser {
   String? type;
   String? url;
 
-  GithubUser({
+  GithubUserEntity({
     this.avatarUrl,
     this.email,
     this.eventsUrl,
@@ -130,7 +136,8 @@ class GithubUser {
     this.url,
   });
 
-  factory GithubUser.fromJson(Map<String, dynamic> json) => GithubUser(
+  factory GithubUserEntity.fromJson(Map<String, dynamic> json) =>
+      GithubUserEntity(
         avatarUrl: json["avatar_url"],
         email: json["email"],
         eventsUrl: json["events_url"],
@@ -179,16 +186,16 @@ class GithubUser {
       };
 }
 
-class Commit {
-  PurpleGitUser? author;
+class CommitEntity {
+  GitUserEntity? author;
   int? commentCount;
-  FluffyGitUser? committer;
+  GitUserEntity? committer;
   String? message;
-  Tree? tree;
+  TreeEntity? tree;
   String? url;
-  Verification? verification;
+  VerificationEntity? verification;
 
-  Commit({
+  CommitEntity({
     this.author,
     this.commentCount,
     this.committer,
@@ -198,20 +205,20 @@ class Commit {
     this.verification,
   });
 
-  factory Commit.fromJson(Map<String, dynamic> json) => Commit(
+  factory CommitEntity.fromJson(Map<String, dynamic> json) => CommitEntity(
         author: json["author"] == null
             ? null
-            : PurpleGitUser.fromJson(json["author"]),
+            : GitUserEntity.fromJson(json["author"]),
         commentCount: json["comment_count"],
         committer: json["committer"] == null
             ? null
-            : FluffyGitUser.fromJson(json["committer"]),
+            : GitUserEntity.fromJson(json["committer"]),
         message: json["message"],
-        tree: json["tree"] == null ? null : Tree.fromJson(json["tree"]),
+        tree: json["tree"] == null ? null : TreeEntity.fromJson(json["tree"]),
         url: json["url"],
         verification: json["verification"] == null
             ? null
-            : Verification.fromJson(json["verification"]),
+            : VerificationEntity.fromJson(json["verification"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -226,18 +233,18 @@ class Commit {
 }
 
 ///Metaproperties for Git author/committer information.
-class PurpleGitUser {
+class GitUserEntity {
   String? date;
   String? email;
   String? name;
 
-  PurpleGitUser({
+  GitUserEntity({
     this.date,
     this.email,
     this.name,
   });
 
-  factory PurpleGitUser.fromJson(Map<String, dynamic> json) => PurpleGitUser(
+  factory GitUserEntity.fromJson(Map<String, dynamic> json) => GitUserEntity(
         date: json["date"],
         email: json["email"],
         name: json["name"],
@@ -250,41 +257,16 @@ class PurpleGitUser {
       };
 }
 
-///Metaproperties for Git author/committer information.
-class FluffyGitUser {
-  String? date;
-  String? email;
-  String? name;
-
-  FluffyGitUser({
-    this.date,
-    this.email,
-    this.name,
-  });
-
-  factory FluffyGitUser.fromJson(Map<String, dynamic> json) => FluffyGitUser(
-        date: json["date"],
-        email: json["email"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "date": date,
-        "email": email,
-        "name": name,
-      };
-}
-
-class Tree {
+class TreeEntity {
   String? sha;
   String? url;
 
-  Tree({
+  TreeEntity({
     this.sha,
     this.url,
   });
 
-  factory Tree.fromJson(Map<String, dynamic> json) => Tree(
+  factory TreeEntity.fromJson(Map<String, dynamic> json) => TreeEntity(
         sha: json["sha"],
         url: json["url"],
       );
@@ -295,20 +277,21 @@ class Tree {
       };
 }
 
-class Verification {
+class VerificationEntity {
   String? payload;
   String? reason;
   String? signature;
   bool? verified;
 
-  Verification({
+  VerificationEntity({
     this.payload,
     this.reason,
     this.signature,
     this.verified,
   });
 
-  factory Verification.fromJson(Map<String, dynamic> json) => Verification(
+  factory VerificationEntity.fromJson(Map<String, dynamic> json) =>
+      VerificationEntity(
         payload: json["payload"],
         reason: json["reason"],
         signature: json["signature"],
@@ -324,7 +307,7 @@ class Verification {
 }
 
 ///Diff Entry
-class DiffEntry {
+class DiffEntryEntity {
   int? additions;
   String? blobUrl;
   int? changes;
@@ -337,7 +320,7 @@ class DiffEntry {
   String? sha;
   Status? status;
 
-  DiffEntry({
+  DiffEntryEntity({
     this.additions,
     this.blobUrl,
     this.changes,
@@ -351,7 +334,8 @@ class DiffEntry {
     this.status,
   });
 
-  factory DiffEntry.fromJson(Map<String, dynamic> json) => DiffEntry(
+  factory DiffEntryEntity.fromJson(Map<String, dynamic> json) =>
+      DiffEntryEntity(
         additions: json["additions"],
         blobUrl: json["blob_url"],
         changes: json["changes"],
@@ -393,18 +377,18 @@ final statusValues = EnumValues({
   "unchanged": Status.UNCHANGED
 });
 
-class Parent {
+class ParentEntity {
   String? htmlUrl;
   String? sha;
   String? url;
 
-  Parent({
+  ParentEntity({
     this.htmlUrl,
     this.sha,
     this.url,
   });
 
-  factory Parent.fromJson(Map<String, dynamic> json) => Parent(
+  factory ParentEntity.fromJson(Map<String, dynamic> json) => ParentEntity(
         htmlUrl: json["html_url"],
         sha: json["sha"],
         url: json["url"],
@@ -417,18 +401,18 @@ class Parent {
       };
 }
 
-class Stats {
+class StatsEntity {
   int? additions;
   int? deletions;
   int? total;
 
-  Stats({
+  StatsEntity({
     this.additions,
     this.deletions,
     this.total,
   });
 
-  factory Stats.fromJson(Map<String, dynamic> json) => Stats(
+  factory StatsEntity.fromJson(Map<String, dynamic> json) => StatsEntity(
         additions: json["additions"],
         deletions: json["deletions"],
         total: json["total"],

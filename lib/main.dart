@@ -1,6 +1,6 @@
 import 'package:f_t_f_test/pages/commit_list_page.dart';
 import 'package:f_t_f_test/provider/commit_provider.dart';
-import 'package:f_t_f_test/theme.dart';
+import 'package:f_t_f_test/core/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:f_t_f_test/models/commits_models.dart';
+import 'package:f_t_f_test/features/commits/domain/entities/entities.dart';
 import 'package:f_t_f_test/services/commit_service.dart';
 import 'package:flutter/material.dart';
 
 class CommitProvider extends ChangeNotifier {
   final _commitService = CommitService();
 
-  List<CommitList> _commitList = [];
-  List<CommitList> get commitList => _commitList;
+  List<CommitListEntity> _commitList = [];
+  List<CommitListEntity> get commitList => _commitList;
 
   String? _error;
   String? get error => _error;

@@ -1,4 +1,4 @@
-import 'package:f_t_f_test/helpers/date.dart';
+import 'package:f_t_f_test/core/helpers/date.dart';
 import 'package:f_t_f_test/provider/commit_provider.dart';
 import 'package:f_t_f_test/widgets/commit_list_tile.dart';
 import 'package:flutter/material.dart';
