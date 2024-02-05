@@ -11,22 +11,6 @@ The **cleanest (architectured)** flutter app designed to provide the git commit 
 3. Run `flutter pub get` to fetch the dependencies.
 4. Run `flutter run` to start the application.
 
-## Project Structure
-
-The project is organized as follows:
-
-- `lib/`: This is where the main Dart code resides. It includes:
-  - `main.dart`: The entry point of the application.
-  - `config.dart`: Configuration file.
-  - `theme.dart`: Theme related code.
-  - `helpers/`: Helper functions and utilities.
-  - `models/`: Data models.
-  - `pages/`: Different pages/screens of the application.
-  - `widgets/`: Reusable widgets.
-  - `provider/`: State management related code.
-  - `services/`: Services like API calls, database operations.
-- `android/`, `ios/`, `linux/`, `macos/`, `windows/`, `web/`: Platform-specific code.
-
 ## Why Provider?
 
 Choosing Provider for state management in a Flutter app provides simplicity and flexibility. Is great for small Flutter apps:
