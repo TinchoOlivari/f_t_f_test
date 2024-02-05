@@ -2,10 +2,15 @@
 
 The **simplest** flutter app designed to provide the git commit history for any pre-configured github repository. The repository to be tracked is easily configurable via the `config.dart` file.
 
-### Flutter Versions `3.13.9`
+### In this repo are 2 branches 
+ - In `main`: The app is the simplest and fastest aproach posible, like an MVP. Due to time limitations, the first version was done this way.
+ - In `clean-architecture`: The app was refactored to be have separation of concerns by dividing the software into layers.
+
+I encourage you to try and see the code of both branches which have the exact same functionality. 
 
 ## Getting Started
 
+#### Flutter Versions `3.13.9`
 1. [Install flutter](https://docs.flutter.dev/get-started/install)
 2. Clone the repo.
 3. Run `flutter pub get` to fetch the dependencies.
