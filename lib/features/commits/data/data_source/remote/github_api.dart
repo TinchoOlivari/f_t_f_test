@@ -1,12 +1,15 @@
-import 'dart:io';
-
+import 'package:f_t_f_test/features/commits/data/models/models.dart';
 import 'package:f_t_f_test/core/config.dart';
-import 'package:f_t_f_test/features/commits/domain/entities/entities.dart';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
-class CommitService {
-  // https://docs.github.com/es/rest/commits/commits#list-commits
-  Future<List<CommitListEntity>> listCommits() async {
+abstract class Api {
+  Future<List<CommitListModel>> getAllCommits();
+}
+
+class GithubApi implements Api {
+  @override
+  Future<List<CommitListModel>> getAllCommits() async {
     const url = '${Config.baseUrl}/commits';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
